@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoute");
 const syncRoutes = require("./routes/syncCartRoute");
 const syncwishlistRoutes = require("./routes/syncWishlist");
 const trackviewRoutes = require("./routes/trackviewRoute");
+const suggestRoutes = require("./routes/suggestRoute");
 
 const popularRoutes = require("./routes/popularRoute");
 
@@ -140,8 +141,12 @@ app.use("/api/wishlistSync", syncwishlistRoutes);
 //popular item fetching
 app.use("/api/popitems", popularRoutes);
 
-
+//storing recently viewed category
 app.use("/api/trackview", trackviewRoutes);
+
+//fetching suggested items
+app.use("api/suggestions", suggestRoutes);
+
 
 //middleware for unknown routes
 app.use((req, res) => {
