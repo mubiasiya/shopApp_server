@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../models/userModel");
 const router = express.Router();
 
 router.post("/track-view", async (req, res) => {
