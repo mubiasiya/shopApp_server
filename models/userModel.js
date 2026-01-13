@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    firebaseUid: { 
+    firebaseUid: {
       type: String,
       required: true,
       unique: true,
@@ -39,6 +39,13 @@ const userSchema = new mongoose.Schema(
           default: 1,
           min: [1, "Quantity cannot be less than 1"],
         },
+      },
+    ],
+    
+    interests: [
+      {
+        category: String,
+        count: { type: Number, default: 1 },
       },
     ],
   },

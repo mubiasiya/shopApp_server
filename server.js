@@ -8,6 +8,7 @@ const Product = require("./models/productModel");
 const authRoutes = require("./routes/authRoute");
 const syncRoutes = require("./routes/syncCartRoute");
 const syncwishlistRoutes = require("./routes/syncWishlist");
+const trackviewRoutes = require("./routes/trackviewRoute");
 
 const popularRoutes = require("./routes/popularRoute");
 
@@ -136,7 +137,11 @@ app.use("/api/cartSync", syncRoutes);
 //wishlistsync route
 app.use("/api/wishlistSync", syncwishlistRoutes);
 
+//popular item fetching
 app.use("/api/popitems", popularRoutes);
+
+
+app.use("/api/trackview", trackviewRoutes);
 
 //middleware for unknown routes
 app.use((req, res) => {
