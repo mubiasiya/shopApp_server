@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/userModel");
 const router = express.Router();
+const Product = require("../models/productModel");
 
 
 router.get("/:firebaseUid", async (req, res) => {
