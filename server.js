@@ -134,7 +134,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/cartSync", syncRoutes);
 
 //wishlistsync route
-app.use("/api/cartSync", syncwishlistRoutes);
+app.use("/api/wishlistSync", syncwishlistRoutes);
 
 app.use("/api/popitems", popularRoutes);
 
