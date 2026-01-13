@@ -13,7 +13,7 @@ router.post("/sync-wishlist", async (req, res) => {
       { firebaseUid: firebaseUid },
       { $set: { wishlist: wishlistItems } },
       { new: true }
-    ).populate("wishlist.productId");
+    ).populate("wishlist");
 
     if (!user) {
       return res
@@ -30,6 +30,7 @@ router.post("/sync-wishlist", async (req, res) => {
   
   catch (error) {
     res.status(500).json({ success: false, message: error.message });
+   
   }
 });
 

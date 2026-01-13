@@ -24,10 +24,10 @@ const userSchema = new mongoose.Schema(
     wishlist: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product", // Assumes your product model is named 'Product'
+        ref: "Product", // product model is named 'Product'
       },
     ],
-    // CART: Array of objects containing Product ID and Quantity
+    //  Array of objects containing Product ID and Quantity
     cart: [
       {
         productId: {
