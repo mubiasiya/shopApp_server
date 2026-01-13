@@ -23,9 +23,12 @@ router.post("/sync-wishlist", async (req, res) => {
 
     res.status(200).json({
       success: true,
-      latestCart: user.cart,
+     
     });
-  } catch (error) {
+    console.log("completed");
+  } 
+  
+  catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 });
