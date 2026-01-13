@@ -145,7 +145,7 @@ app.use("/api/popitems", popularRoutes);
 app.use("/api/trackview", trackviewRoutes);
 
 //fetching suggested items
-app.use("api/suggestions", suggestRoutes);
+app.use("/api/suggestions", suggestRoutes);
 
 
 //middleware for unknown routes
