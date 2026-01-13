@@ -7,6 +7,8 @@ const app = express();
 const Product = require("./models/productModel");
 const authRoutes = require("./routes/authRoute");
 const syncRoutes = require("./routes/syncCartRoute");
+const syncwishlistRoutes = require("./routes/syncWishlist");
+
 const popularRoutes = require("./routes/popularRoute");
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -130,6 +132,9 @@ app.use("/api/auth", authRoutes);
 
 //cartsync route
 app.use("/api/cartSync", syncRoutes);
+
+//wishlistsync route
+app.use("/api/cartSync", syncwishlistRoutes);
 
 app.use("/api/popitems", popularRoutes);
 
