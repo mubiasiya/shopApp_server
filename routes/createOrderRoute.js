@@ -42,8 +42,9 @@ router.post("/create-order", async (req, res) => {
 });
 
 router.get("/my-orders/:uid", async (req, res) => {
+  console.log(req.params.uid);
   try {
-    const orders = await Order.find({ firebaseUid: req.params.uid }).sort({
+    const orders = await Order.find({user: req.params.uid }).sort({
       createdAt: -1,
     }); // Newest first
 
