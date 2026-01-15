@@ -10,6 +10,7 @@ const syncRoutes = require("./routes/syncCartRoute");
 const syncwishlistRoutes = require("./routes/syncWishlist");
 const trackviewRoutes = require("./routes/trackviewRoute");
 const suggestRoutes = require("./routes/suggestRoute");
+const orderRoutes = require("./routes/createOrderRoute");
 
 const popularRoutes = require("./routes/popularRoute");
 
@@ -146,6 +147,9 @@ app.use("/api/trackview", trackviewRoutes);
 
 //fetching suggested items
 app.use("/api/suggestions", suggestRoutes);
+
+//create order
+app.use("/api/order", orderRoutes);
 
 
 //middleware for unknown routes

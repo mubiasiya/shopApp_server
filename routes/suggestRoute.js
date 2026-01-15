@@ -24,7 +24,7 @@ router.get("/:firebaseUid", async (req, res) => {
     const suggestions = await Product.find({
       category: { $in: topCategories },
       _id: { $nin: user.wishlist.map((item) => item.productId) },
-    }).limit(10);
+    }).limit(5);
 
     res.json({ success: true, products: suggestions });
   } catch (error) {
