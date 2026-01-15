@@ -1,21 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/productModel");
-const Order=require("../models/orderModel")
+const Order = require("../models/orderModel");
 
 router.post("/create-order", async (req, res) => {
-  const { userId, cartItems, shippingAddress } = req.body;
+  const { userId, cartItems, shippingAddress, } = req.body;
 
   try {
-   
     let total = 0;
     for (const item of cartItems) {
       const product = await Product.findById(item.productId);
-    //   if (product.stock < item.quantity) {
-    //     return res
-    //       .status(400)
-    //       .json({ message: `${product.title} is out of stock` });
-    //   }
+      //   if (product.stock < item.quantity) {
+      //     return res
+      //       .status(400)
+      //       .json({ message: `${product.title} is out of stock` });
+      //   }
       total += product.price * item.quantity;
     }
 
