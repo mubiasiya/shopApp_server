@@ -36,12 +36,16 @@ router.put('/edit-address', async (req, res) => {
   try {
     const user = await User.findOneAndUpdate(
       { firebaseUid: uid, "addresses._id": addressId },
-      { 
-        $set: { "addresses.$": { ...updatedAddress, _id: addressId } } 
+      {
+        $set: { "addresses.$": { ...updatedAddress, _id: addressId } },
       },
-      { new: true }
+      { new: true },
     );
-
+   
+    if (!user) {
+      console.log("User not found for UID:", uid);
+      return res.status(404).json({ error: "User or Address not found" });
+    }
     res.status(200).json({ success: true, addresses: user.addresses });
   } catch (err) {
     res.status(500).json({ error: err.message });
