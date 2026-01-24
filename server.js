@@ -6,6 +6,7 @@ const { v2: cloudinary } = require("cloudinary");
 const app = express();
 const Product = require("./models/productModel");
 const authRoutes = require("./routes/authRoute");
+const addressRoutes = require("./routes/addressRoute");
 const syncRoutes = require("./routes/syncCartRoute");
 const syncwishlistRoutes = require("./routes/syncWishlist");
 const trackviewRoutes = require("./routes/trackviewRoute");
@@ -150,6 +151,9 @@ app.use("/api/suggestions", suggestRoutes);
 
 //create order
 app.use("/api/order", orderRoutes);
+
+//add address
+app.use("/api/address", addressRoutes);
 
 
 //middleware for unknown routes

@@ -20,6 +20,19 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    addresses: [
+      {
+        name: { type: String, required: true },
+        mobile: { type: String, required: true },
+        pincode: { type: String, required: true },
+        house: { type: String, required: true },
+        street: { type: String, required: true },
+        landmark: { type: String },
+        city: { type: String, required: true },
+        isDefault: { type: Boolean, default: false }, // Useful for Checkout
+      },
+    ],
     // WISHLIST: Array of Product IDs
     wishlist: [
       {
@@ -41,7 +54,7 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
-    
+
     interests: [
       {
         category: String,
@@ -49,7 +62,7 @@ const userSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("User", userSchema);
