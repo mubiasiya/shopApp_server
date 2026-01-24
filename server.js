@@ -12,8 +12,8 @@ const syncwishlistRoutes = require("./routes/syncWishlist");
 const trackviewRoutes = require("./routes/trackviewRoute");
 const suggestRoutes = require("./routes/suggestRoute");
 const orderRoutes = require("./routes/createOrderRoute");
-
 const popularRoutes = require("./routes/popularRoute");
+const detailsRoutes = require("./routes/userDetailsRoute");
 
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -154,6 +154,9 @@ app.use("/api/order", orderRoutes);
 
 //add address
 app.use("/api/address", addressRoutes);
+
+//user details
+app.use("/api/detals", detailsRoutes);
 
 
 //middleware for unknown routes

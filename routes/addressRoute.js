@@ -28,3 +28,41 @@ router.post("/add-address", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+router.put('/edit-address', async (req, res) => {
+  const { uid, addressId, updatedAddress } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { firebaseUid: uid, "addresses._id": addressId },
+      { 
+        $set: { "addresses.$": { ...updatedAddress, _id: addressId } } 
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, addresses: user.addresses });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Remove a specific address
+router.delete('/remove-address', async (req, res) => {
+  const { uid, addressId } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { firebaseUid: uid },
+      { $pull: { addresses: { _id: addressId } } },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, addresses: user.addresses });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+module.exports = router;
