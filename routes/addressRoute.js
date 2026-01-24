@@ -11,7 +11,11 @@ router.post("/add-address", async (req, res) => {
     const updatedUser = await User.findOneAndUpdate(
       { firebaseUid: uid },
       { $push: { addresses: addressData } }, // Adds to the array
-      { new: true },
+      {
+        new: true, // Return the document AFTER the push
+        runValidators: true, // Force check if addressData has all required fields
+        setDefaultsOnInsert: true,
+      },
     );
 
     if (!updatedUser) return res.status(404).send("User not found");
