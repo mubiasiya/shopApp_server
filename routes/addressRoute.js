@@ -34,8 +34,9 @@ router.put('/edit-address', async (req, res) => {
   const { uid, addressId, updatedAddress } = req.body;
 
   try {
+    const objectId = new mongoose.Types.ObjectId(addressId);
     const user = await User.findOneAndUpdate(
-      { firebaseUid: uid, "addresses._id": addressId },
+      { firebaseUid: uid, "addresses._id": objectId },
       {
         $set: { "addresses.$": { ...updatedAddress, _id: addressId } },
       },
