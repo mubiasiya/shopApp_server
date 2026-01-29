@@ -64,7 +64,7 @@ router.put("/edit-address", async (req, res) => {
 
     res.status(200).json({ success: true, addresses: updatedUser.addresses });
   } catch (err) {
-    res.status(500).json({ error: "Invalid ID format or Server Error" });
+    res.status(500).json({ error: "Invalid ID format or Server Error" ,err});
   }
 });
 
