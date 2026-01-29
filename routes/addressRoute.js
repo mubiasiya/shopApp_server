@@ -30,41 +30,32 @@ router.post("/add-address", async (req, res) => {
   }
 });
 
-
 router.put("/edit-address", async (req, res) => {
   const { uid, addressId, updatedAddress } = req.body;
 
-  // LOG THE DATA TO YOUR TERMINAL
-  console.log("Searching for UID:", uid);
-  console.log("Searching for Address ID:", addressId);
-
   try {
-    // const objectId = new mongoose.Types.ObjectId(addressId);
-
-    // Find the user first to see if they exist at all
-    const userExists = await User.findOne({ firebaseUid: uid });
-    if (!userExists) {
-      return res.status(404).json({ error: "User UID not found in database" });
+    // Check if addressId is valid before converting
+    if (!mongoose.Types.ObjectId.isValid(addressId)) {
+      return res.status(400).json({ error: "Invalid Address ID format" });
     }
-   
 
-    const updatedUser = await User.findOneAndUpdate(
-      { firebaseUid: uid, "addresses._id": addressIdd },
+    const addrObjectId = new mongoose.Types.ObjectId(addressId);
+
+    const user = await User.findOneAndUpdate(
+      { firebaseUid: uid, "addresses._id": addrObjectId },
       {
-        $set: { "addresses.$": { ...updatedAddress, _id: addressId } },
+        $set: { "addresses.$": { ...updatedAddress, _id: addrObjectId } },
       },
       { new: true },
     );
 
-    if (!updatedUser) {
-      return res
-        .status(404)
-        .json({ error: "Address ID not found for this user" });
-    }
+    if (!user) return res.status(404).json({ error: "Address not found" });
 
-    res.status(200).json({ success: true, addresses: updatedUser.addresses });
+    res.status(200).json({ success: true, addresses: user.addresses });
   } catch (err) {
-    res.status(500).json({ error: "Invalid ID format or Server Error" ,err});
+    // Log the actual error to your terminal so you can see it
+    console.error("Update Error:", err);
+    res.status(500).json({ error: "Server Error", details: err.message });
   }
 });
 
