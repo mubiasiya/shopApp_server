@@ -64,7 +64,7 @@ router.delete('/remove-address', async (req, res) => {
   const { uid, addressId } = req.body;
 
   try {
-    const user = await User.findOneAndUpdate(
+    const user = await User.findOneAndDelete(
       { firebaseUid: uid },
       { $pull: { addresses: { _id: addressId } } },
       { new: true }
