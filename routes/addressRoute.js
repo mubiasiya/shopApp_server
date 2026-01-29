@@ -46,9 +46,10 @@ router.put("/edit-address", async (req, res) => {
     if (!userExists) {
       return res.status(404).json({ error: "User UID not found in database" });
     }
+   
 
     const updatedUser = await User.findOneAndUpdate(
-      { firebaseUid: uid, "addresses._id": addressId },
+      { firebaseUid: uid, "addresses._id": addressIdd },
       {
         $set: { "addresses.$": { ...updatedAddress, _id: addressId } },
       },
