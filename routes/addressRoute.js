@@ -39,7 +39,7 @@ router.put("/edit-address", async (req, res) => {
   console.log("Searching for Address ID:", addressId);
 
   try {
-    const objectId = new mongoose.Types.ObjectId(addressId);
+    // const objectId = new mongoose.Types.ObjectId(addressId);
 
     // Find the user first to see if they exist at all
     const userExists = await User.findOne({ firebaseUid: uid });
@@ -48,9 +48,9 @@ router.put("/edit-address", async (req, res) => {
     }
 
     const updatedUser = await User.findOneAndUpdate(
-      { firebaseUid: uid, "addresses._id": objectId },
+      { firebaseUid: uid, "addresses._id": addressId },
       {
-        $set: { "addresses.$": { ...updatedAddress, _id: objectId } },
+        $set: { "addresses.$": { ...updatedAddress, _id: addressId } },
       },
       { new: true },
     );
