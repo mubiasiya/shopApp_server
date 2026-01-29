@@ -60,20 +60,23 @@ router.put("/edit-address", async (req, res) => {
 });
 
 // Remove a specific address
-router.delete('/remove-address', async (req, res) => {
+router.delete("/remove-address", async (req, res) => {
   const { uid, addressId } = req.body;
 
   try {
-    const user = await User.findOneAndDelete(
+    const user = await User.findOneAndUpdate(
       { firebaseUid: uid },
+    
       { $pull: { addresses: { _id: addressId } } },
-      { new: true }
+      { new: true },
     );
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
     res.status(200).json({ success: true, addresses: user.addresses });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
-module.exports = router;
