@@ -60,7 +60,7 @@ router.put("/edit-address", async (req, res) => {
 });
 
 // Remove a specific address
-router.delete("/remove-address", async (req, res) => {
+router.post("/remove-address", async (req, res) => {
   const { uid, addressId } = req.body;
 
   try {
