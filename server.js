@@ -156,7 +156,7 @@ app.use("/api/order", orderRoutes);
 app.use("/api/address", addressRoutes);
 
 //user details
-app.use("/api/detals", detailsRoutes);
+app.use("/api/details", detailsRoutes);
 
 
 //middleware for unknown routes
